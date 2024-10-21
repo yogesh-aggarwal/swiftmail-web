@@ -1,5 +1,14 @@
-import { APP_COMMIT_ID } from "@core/constants"
+import { TooltipProvider } from "@ui/tooltip"
+
+import { ThemeProvider } from "@providers/theme"
+import Root from "./routes/root"
 
 export default function App() {
-   return <div className="text-2xl">{APP_COMMIT_ID}</div>
+   return (
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+         <TooltipProvider delayDuration={0}>
+            <Root />
+         </TooltipProvider>
+      </ThemeProvider>
+   )
 }

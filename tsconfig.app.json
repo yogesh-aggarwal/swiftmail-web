@@ -24,6 +24,8 @@
       "baseUrl": ".",
       "paths": {
          // Components
+         "@ui/*": ["src/components/ui/*"],
+         "@providers/*": ["src/components/providers/*"],
          "@components/*": ["src/components/*"],
          // Lib -> Core -> *
          "@api/*": ["src/lib/core/api/*", "src/lib/api/*"],
@@ -35,7 +37,9 @@
          // Lib -> Hooks
          "@hooks/*": ["src/lib/hooks/*"],
          // Lib -> Integrations
-         "@integrations/*": ["src/lib/integrations/*"]
+         "@integrations/*": ["src/lib/integrations/*"],
+         // src
+         "@/*": ["./src/*"]
       }
    },
    "include": ["src"]
