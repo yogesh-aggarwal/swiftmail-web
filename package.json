@@ -14,6 +14,7 @@
    },
    "dependencies": {
       "common-react-toolkit": "^8.2.2",
+      "firebase": "^11.0.1",
       "framer-motion": "^11.11.11",
       "posthog-js": "^1.180.1",
       "react": "^18.3.1",
