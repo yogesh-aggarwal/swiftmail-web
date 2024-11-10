@@ -16,3 +16,8 @@ code,
 pre {
    font-family: "Geist Mono", monospace;
 }
+
+:root {
+   --primary: hsl(69.7, 98.8%, 66.9%);
+   --background: hsl(300, 4.3%, 95.5%);
+}
