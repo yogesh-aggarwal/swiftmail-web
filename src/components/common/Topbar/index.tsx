@@ -24,7 +24,7 @@ export default function Topbar(props: {
                   key={action.name}
                   onClick={action.onClick}
                   className={classNames(
-                     "flex h-[48px] cursor-pointer items-center justify-center rounded-[1.3rem] px-5",
+                     "flex h-[48px] cursor-pointer items-center justify-center rounded-[1.1rem] px-5",
                      action.active ? "bg-primary" : "bg-white"
                   )}
                >
@@ -38,7 +38,7 @@ export default function Topbar(props: {
          <div></div>
          <div className="flex items-center justify-end gap-[.4rem]">
             {props.search && (
-               <div className="flex h-[48px] w-full items-center gap-4 rounded-[1.3rem] bg-white px-5">
+               <div className="flex h-[48px] w-full items-center gap-4 rounded-[1.1rem] bg-white px-5">
                   <input
                      type="text"
                      className="w-full outline-none"
