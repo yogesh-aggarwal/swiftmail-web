@@ -1,14 +1,10 @@
-import Footer from "@components/common/Footer"
-import Header from "@components/common/Header"
+import Leftbar from "@components/common/Leftbar"
 
 export default function BaseLayout(props: { children: React.ReactNode }) {
    return (
-      <div className="grid grid-rows-[min-content,1fr] h-screen overflow-auto">
-         <Header />
-         <div className="h-full overflow-auto">
-            {props.children}
-            <Footer />
-         </div>
+      <div className="grid grid-cols-[min-content,1fr] h-screen overflow-auto">
+         <Leftbar />
+         <div className="h-full overflow-auto">{props.children}</div>
       </div>
    )
 }
