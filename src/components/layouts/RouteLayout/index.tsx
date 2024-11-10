@@ -6,7 +6,7 @@ export default function RouteLayout(
    return (
       <div className="grid h-screen grid-rows-[min-content,1fr] overflow-auto">
          {props.topbar}
-         <div {...props} className={`h-full overflow-auto ${props.className}`}>
+         <div {...props} className={`h-full overflow-auto p-2 pt-0 ${props.className}`}>
             {props.children}
          </div>
       </div>
