@@ -11,11 +11,13 @@ namespace Components {
    }
 
    export function Authenticated() {
-      const Blog = lazy(() => import("./routes/Blog"))
-      const Changelog = lazy(() => import("./routes/Changelog"))
+      const Inbox = lazy(() => import("./routes/Inbox"))
+      const Digest = lazy(() => import("./routes/Digest"))
+      const Attachments = lazy(() => import("./routes/Attachments"))
+      const Contacts = lazy(() => import("./routes/Contacts"))
       const Dashboard = lazy(() => import("./routes/Dashboard"))
-      const Docs = lazy(() => import("./routes/Docs"))
-      const Pricing = lazy(() => import("./routes/Pricing"))
+      const Templates = lazy(() => import("./routes/Templates"))
+      const Notifications = lazy(() => import("./routes/Notifications"))
 
       return (
          <BrowserRouter>
@@ -25,11 +27,13 @@ namespace Components {
                      <Route path="/" element={<Navigate to="/dashboard" />} />
                      <Route path="*" element={<Navigate to="/dashboard" />} />
 
+                     <Route path="/inbox" element={<Inbox />} />
+                     <Route path="/digest" element={<Digest />} />
+                     <Route path="/attachments" element={<Attachments />} />
+                     <Route path="/contacts" element={<Contacts />} />
                      <Route path="/dashboard" element={<Dashboard />} />
-                     <Route path="/docs" element={<Docs />} />
-                     <Route path="/blog" element={<Blog />} />
-                     <Route path="/pricing" element={<Pricing />} />
-                     <Route path="/changelog" element={<Changelog />} />
+                     <Route path="/templates" element={<Templates />} />
+                     <Route path="/notifications" element={<Notifications />} />
                   </Routes>
                </Suspense>
             </BaseLayout>
