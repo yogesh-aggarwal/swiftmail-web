@@ -24,8 +24,8 @@ namespace Components {
             <BaseLayout>
                <Suspense fallback={<ProgressCircle />}>
                   <Routes>
-                     <Route path="/" element={<Navigate to="/dashboard" />} />
-                     <Route path="*" element={<Navigate to="/dashboard" />} />
+                     <Route path="/" element={<Navigate to="/inbox" />} />
+                     <Route path="*" element={<Navigate to="/inbox" />} />
 
                      <Route path="/inbox" element={<Inbox />} />
                      <Route path="/digest" element={<Digest />} />
