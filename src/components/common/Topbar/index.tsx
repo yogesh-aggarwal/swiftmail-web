@@ -63,7 +63,7 @@ export default function Topbar(props: {
                </div>
             ))}
             {props.settings && (
-               <div className="flex aspect-[1.1] h-[48px] cursor-pointer items-center justify-center gap-4 rounded-[1.3rem] rounded-br-none rounded-tr-none bg-black text-white">
+               <div className="flex aspect-[1.1] h-[48px] cursor-pointer items-center justify-center gap-4 rounded-[1.1rem] rounded-br-none rounded-tr-none bg-black text-white">
                   <Settings size={20} />
                </div>
             )}
