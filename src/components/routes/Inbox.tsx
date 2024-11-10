@@ -29,5 +29,7 @@ export default function Inbox() {
       []
    )
 
-   return <RouteLayout topbar={topbar}></RouteLayout>
+   return <RouteLayout topbar={topbar}>
+      <div className=""></div>
+   </RouteLayout>
 }
