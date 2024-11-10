@@ -1,9 +1,9 @@
 import { ReactNode } from "react"
 
-export default function RouteLayout(props: { header: ReactNode; children: ReactNode }) {
+export default function RouteLayout(props: { topbar: ReactNode; children?: ReactNode }) {
    return (
       <div className="grid grid-rows-[min-content,1fr] h-screen overflow-auto">
-         {props.header}
+         {props.topbar}
          <div className="h-full overflow-auto">{props.children}</div>
       </div>
    )
