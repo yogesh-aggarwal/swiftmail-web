@@ -41,7 +41,7 @@ namespace Components {
    export function Route(props: { icon: React.ReactNode; route: string; highlight?: boolean }) {
       const router = useRouter()
       const route = useLocation().pathname.split("/")[1]
-      const isActive = props.route.startsWith("/" + route)
+      const isActive = !!route && props.route.startsWith("/" + route)
 
       return (
          <SectionButton onClick={() => router(props.route)} active={isActive} highlight={props.highlight}>
