@@ -1,10 +1,10 @@
+import { LucideStar, Stars, VenetianMask } from "lucide-react"
 import { useMemo } from "react"
+import { Outlet } from "react-router-dom"
 
 import Topbar from "@components/common/Topbar"
 import RouteLayout from "@layouts/RouteLayout"
 import { classNames } from "@utils/ui"
-import { LucideStar, Stars, VenetianMask } from "lucide-react"
-import { Outlet } from "react-router-dom"
 
 namespace Components {
    export function Card() {
@@ -18,7 +18,7 @@ namespace Components {
             <div className="flex items-center justify-between">
                <div className="flex items-center gap-2">
                   <LucideStar size={16} />
-                  <div className="text-[.95rem] font-medium">Sender</div>
+                  <div className="text-[1rem] font-medium">Sender</div>
                </div>
                <div className="text-[.75rem] opacity-55">20:32</div>
             </div>
@@ -64,7 +64,7 @@ export default function Inbox() {
 
    return (
       <RouteLayout topbar={topbar} className="grid grid-cols-[min-content,1fr] gap-2">
-         <div className="grid h-full w-[400px] grid-rows-[min-content,1fr] overflow-y-auto rounded-[2rem] bg-white">
+         <div className="grid h-full w-[400px] grid-rows-[min-content,1fr] overflow-y-auto rounded-[1.6rem] bg-white">
             <div className="flex h-[72px] items-center justify-between px-5">
                <div className="text-[1.5rem] font-medium">Inbox</div>
                <div className="flex aspect-square w-[36px] items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
@@ -80,7 +80,7 @@ export default function Inbox() {
                </div>
             </div>
          </div>
-         <div className="h-full w-full overflow-y-auto rounded-[2rem] bg-white">
+         <div className="h-full w-full overflow-y-auto rounded-[1.6rem] bg-white">
             <Outlet />
          </div>
       </RouteLayout>
