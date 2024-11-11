@@ -151,6 +151,7 @@ export default function DigestRoute() {
       uiStore.merge({ digests: digests })
    }, [digestsStore, messagesStore])
 
+   /* Update the messages */
    useBoundValue(() => {
       /* Filter out messages */
       const digestID = uiStore.value().digestID
