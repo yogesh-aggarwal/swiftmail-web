@@ -7,8 +7,11 @@ import App from "@components/App"
 import { POSTHOG_API_HOST, POSTHOG_API_KEY } from "@core/constants"
 import { PushNotificationManager } from "@utils/sw"
 import { PostHogProvider } from "posthog-js/react"
+import { QueryClient, QueryClientProvider } from "react-query"
 
 PushNotificationManager.registerServiceWorker()
+
+const queryClient = new QueryClient()
 
 function Analytics(props: { children: any }) {
    return (
@@ -21,7 +24,9 @@ function Analytics(props: { children: any }) {
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
       <Analytics>
-         <App />
+         <QueryClientProvider client={queryClient}>
+            <App />
+         </QueryClientProvider>
       </Analytics>
    </StrictMode>
 )
