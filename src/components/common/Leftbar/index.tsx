@@ -1,5 +1,5 @@
 import { useRouter } from "@hooks/useRouter"
-import { Bell, CircleGauge, Contact, Edit2, HelpCircle, Inbox, Rss, Signature, User } from "lucide-react"
+import { Bell, ChartArea, Contact, Edit2, Inbox, Rss, Signature, User } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 namespace Components {
@@ -52,18 +52,17 @@ export default function Leftbar() {
    return (
       <header className="flex w-[70px] flex-col justify-between gap-2 p-2">
          <Components.Section>
+            <Components.Route icon={<ChartArea size={18} />} route="/dashboard" />
             <Components.Route icon={<Inbox size={18} />} route="/inbox" />
             <Components.Route icon={<Rss size={18} />} route="/digest" />
             {/* <Components.Route icon={<Paperclip size={18} />} route="/attachments" /> */}
             <Components.Route icon={<Contact size={18} />} route="/contacts" />
-            <Components.Route icon={<CircleGauge size={18} />} route="/dashboard" />
-            <Components.Route icon={<Signature size={18} />} route="/templates" />
             <Components.ActionButton icon={<Edit2 size={18} />} onClick={() => {}} />
          </Components.Section>
          <Components.Section>
-            <Components.Route icon={<User size={18} />} route="/" />
+            <Components.Route icon={<Signature size={18} />} route="/templates" />
             <Components.Route icon={<Bell size={18} />} route="/notifications" />
-            <Components.Route icon={<HelpCircle size={18} />} route="/help" />
+            <Components.Route icon={<User size={18} />} route="/" />
          </Components.Section>
       </header>
    )

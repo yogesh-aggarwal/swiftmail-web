@@ -9,7 +9,7 @@ export default function Topbar(props: {
       onSearch: (query: string) => any
       onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => any
    }
-   actions: { name: string; badge: string; active?: boolean; onClick: () => any }[]
+   actions: { name: string; badge?: string; active?: boolean; onClick: () => any }[]
    secondaryActions?: { name: string; icon: ReactNode; active?: boolean; onClick: () => any }[]
 }) {
    return (
