@@ -1,3 +1,6 @@
+import { messagesStore } from "../state"
+import { Model } from "./model"
+
 export type MessageEmailData = {
    subject: string
    html_content: string
@@ -44,3 +47,14 @@ export type Message = {
    labels: string[]
    digests: string[]
 }
+
+class _MessageDB extends Model<Message> {
+   constructor() {
+      super({
+         collection: "messages",
+         store: messagesStore,
+      })
+   }
+}
+
+export const MessageDB = new _MessageDB()
