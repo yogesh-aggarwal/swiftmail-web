@@ -1,9 +1,6 @@
-import { useMemo } from "react"
-
-import Topbar from "@components/common/Topbar"
 import RouteLayout from "@layouts/RouteLayout"
 import { classNames } from "@utils/ui"
-import { Signature, Stars, VenetianMask } from "lucide-react"
+import { Signature } from "lucide-react"
 import { Outlet } from "react-router-dom"
 
 namespace Components {
@@ -28,32 +25,8 @@ namespace Components {
 }
 
 export default function Templates() {
-   const topbar = useMemo(
-      () => (
-         <Topbar
-            settings
-            actions={[
-               { name: "Primary", badge: "3", onClick: () => alert("Primary"), active: true },
-               { name: "Social", badge: "3", onClick: () => alert("Social") },
-               { name: "Promotional", badge: "3", onClick: () => alert("Promotional") },
-               { name: "Updates", badge: "3", onClick: () => alert("Updates") },
-            ]}
-            search={{
-               placeholder: "Search in emails",
-               onSearch: (query) => console.log(query),
-               onKeyUp: (e) => e.key === "Enter" && console.log("Search"),
-            }}
-            secondaryActions={[
-               { name: "Ask AI", icon: <Stars size={18} />, onClick: () => alert("Refresh") },
-               { name: "Anonymous mode", icon: <VenetianMask size={20} />, onClick: () => alert("More") },
-            ]}
-         />
-      ),
-      []
-   )
-
    return (
-      <RouteLayout topbar={topbar} className="grid grid-cols-[min-content,1fr] gap-2">
+      <RouteLayout topbar={<div className="mt-2"></div>} className="grid grid-cols-[min-content,1fr] gap-2">
          <div className="grid h-full w-[400px] grid-rows-[min-content,1fr] overflow-y-auto rounded-[1.6rem] bg-white">
             <div className="flex h-[72px] items-center justify-between px-5">
                <div className="text-[1.5rem] font-medium">Templates</div>
