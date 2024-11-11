@@ -1,21 +1,10 @@
 import { useRouter } from "@hooks/useRouter"
-import {
-   Bell,
-   CircleGauge,
-   Contact,
-   HelpCircle,
-   Inbox,
-   Paperclip,
-   Plus,
-   Rss,
-   Signature,
-   User,
-} from "lucide-react"
+import { Bell, CircleGauge, Contact, HelpCircle, Inbox, Plus, Rss, Signature, User } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 namespace Components {
    export function Section(props: { children?: React.ReactNode }) {
-      return <div className="rounded-full bg-white w-full p-1 flex gap-1 flex-col">{props.children}</div>
+      return <div className="flex w-full flex-col gap-1 rounded-full bg-white p-1">{props.children}</div>
    }
 
    function SectionButton(props: {
@@ -27,9 +16,9 @@ namespace Components {
       return (
          <div
             className={
-               "flex justify-center items-center rounded-full aspect-square w-full cursor-pointer " +
-               (props.active ? "bg-black text-white " : "") +
-               (props.highlight ? "bg-primary " : "")
+               "flex aspect-square w-full cursor-pointer items-center justify-center rounded-full " +
+               (props.active ? "bg-black text-white" : "") +
+               (props.highlight ? "bg-primary" : "")
             }
             onClick={props.onClick}
          >
@@ -61,11 +50,11 @@ namespace Components {
 
 export default function Leftbar() {
    return (
-      <header className="w-[70px] p-2 flex gap-2 flex-col justify-between">
+      <header className="flex w-[70px] flex-col justify-between gap-2 p-2">
          <Components.Section>
             <Components.Route icon={<Inbox size={18} />} route="/inbox" />
             <Components.Route icon={<Rss size={18} />} route="/digest" />
-            <Components.Route icon={<Paperclip size={18} />} route="/attachments" />
+            {/* <Components.Route icon={<Paperclip size={18} />} route="/attachments" /> */}
             <Components.Route icon={<Contact size={18} />} route="/contacts" />
             <Components.Route icon={<CircleGauge size={18} />} route="/dashboard" />
             <Components.Route icon={<Signature size={18} />} route="/templates" />
