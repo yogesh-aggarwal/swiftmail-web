@@ -65,18 +65,20 @@ export default function Inbox() {
    return (
       <RouteLayout topbar={topbar} className="grid grid-cols-[min-content,1fr] gap-2">
          <div className="grid h-full w-[400px] grid-rows-[min-content,1fr] overflow-y-auto rounded-[1.6rem] bg-white">
-            <div className="flex h-[72px] items-center justify-between px-5">
-               <div className="text-[1.5rem] font-medium">Inbox</div>
-               <div className="flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
-                  <Filter size={16} />
+            <div>
+               <div className="flex h-[72px] items-center justify-between px-5">
+                  <div className="text-[1.5rem] font-medium">Inbox</div>
+                  <div className="flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
+                     <Filter size={16} />
+                  </div>
                </div>
-            </div>
-            <div className="flex items-center gap-1 px-5 pb-2">
-               <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
-                  Unread
-               </div>
-               <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
-                  Urgent
+               <div className="flex items-center gap-1 px-5 pb-2">
+                  <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
+                     Unread
+                  </div>
+                  <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
+                     Urgent
+                  </div>
                </div>
             </div>
             <div className="flex h-full flex-col gap-1 overflow-y-auto p-2 pt-0">
