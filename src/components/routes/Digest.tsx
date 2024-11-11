@@ -55,7 +55,12 @@ export default function Digest() {
             }}
             secondaryActions={[
                { name: "Ask AI", icon: <Stars size={18} />, onClick: () => alert("Refresh") },
-               { name: "Create new digest", icon: <PlusCircle size={20} />, onClick: () => alert("More") },
+               {
+                  name: "Create new digest",
+                  icon: <PlusCircle size={20} />,
+                  onClick: () => alert("More"),
+                  active: true,
+               },
             ]}
          />
       ),

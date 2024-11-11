@@ -1,5 +1,5 @@
 import { useRouter } from "@hooks/useRouter"
-import { Bell, CircleGauge, Contact, HelpCircle, Inbox, Plus, Rss, Signature, User } from "lucide-react"
+import { Bell, CircleGauge, Contact, Edit2, HelpCircle, Inbox, Rss, Signature, User } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 namespace Components {
@@ -58,7 +58,7 @@ export default function Leftbar() {
             <Components.Route icon={<Contact size={18} />} route="/contacts" />
             <Components.Route icon={<CircleGauge size={18} />} route="/dashboard" />
             <Components.Route icon={<Signature size={18} />} route="/templates" />
-            <Components.ActionButton icon={<Plus size={18} />} onClick={() => {}} />
+            <Components.ActionButton icon={<Edit2 size={18} />} onClick={() => {}} />
          </Components.Section>
          <Components.Section>
             <Components.Route icon={<User size={18} />} route="/" />

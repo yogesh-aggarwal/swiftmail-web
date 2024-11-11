@@ -55,8 +55,8 @@ export default function Topbar(props: {
                   title={action.name}
                   onClick={action.onClick}
                   className={classNames(
-                     "flex aspect-[1.1] h-[48px] cursor-pointer items-center justify-center gap-4 rounded-[1.3rem] bg-white",
-                     { "bg-black": action.active }
+                     "flex aspect-[1.1] h-[48px] cursor-pointer items-center justify-center gap-4 rounded-[1.3rem]",
+                     action.active ? "bg-black text-white" : "bg-white"
                   )}
                >
                   {action.icon}
