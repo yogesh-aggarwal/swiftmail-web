@@ -1,9 +1,20 @@
 import { lazy, Suspense } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
+import { db } from "@core/db/firebase"
 import BaseLayout from "@layouts/BaseLayout"
+import { DigestDB } from "@models/digest"
+import { MessageDB } from "@models/message"
 import ProgressCircle from "@ui/ProgressCircle"
-import { useAuth } from "src/lib/state"
+import { collection, query, where } from "firebase/firestore"
+import { useAuth, userStore } from "src/lib/state"
+
+userStore.subscribe((user) => {
+   if (!user) return
+
+   DigestDB.ListenDocsByQuery(query(collection(db, DigestDB.collection), where("user_id", "==", user.id)))
+   MessageDB.ListenDocsByQuery(query(collection(db, MessageDB.collection), where("user_id", "==", user.id)))
+})
 
 namespace Components {
    export function Unauthenticated() {
