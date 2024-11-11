@@ -6,9 +6,9 @@ export default {
          colors: {
             background: "var(--background)",
             primary: "var(--primary)",
-            "purple-bg": "hsl(240, 40.5%, 92.7%)",
-            "gray-bg": "hsl(240, 3%, 93.5%)",
-            "green-bg": "hsl(109.4, 27.9%, 88%)",
+            "purple-bg": "var(--purple-bg)",
+            "gray-bg": "var(--gray-bg)",
+            "green-bg": "var(--green-bg)",
          },
       },
    },

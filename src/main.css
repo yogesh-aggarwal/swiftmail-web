@@ -18,6 +18,9 @@ pre {
 }
 
 :root {
-   --primary: hsl(69.7, 98.8%, 66.9%);
-   --background: hsl(300, 4.3%, 95.5%);
+   --primary: hsl(60, 5.9%, 86.7%);
+   --background: hsl(240, 3%, 93.5%);
+   --purple-bg: rgba(229, 229, 244, 0.5);
+   --gray-bg: rgb(247, 247, 248);
+   --green-bg: rgb(219, 233, 216);
 }
