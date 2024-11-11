@@ -6,6 +6,7 @@ import BaseLayout from "@layouts/BaseLayout"
 import { DigestDB } from "@models/digest"
 import { MessageDB } from "@models/message"
 import ProgressCircle from "@ui/ProgressCircle"
+import { initAuthListener } from "@utils/auth"
 import { collection, query, where } from "firebase/firestore"
 import { useAuth, userStore } from "src/lib/state"
 
@@ -53,8 +54,14 @@ namespace Components {
    }
 }
 
+initAuthListener()
+
 export default function App() {
    const isAuthenticated = useAuth()
+
+   // onMount(() => {
+   //    signInWithEmailAndPassword(auth, "yogeshdevaggarwal@gmail.com", "12345678")
+   // })
 
    return isAuthenticated ? <Components.Authenticated /> : <Components.Unauthenticated />
 }
