@@ -23,13 +23,7 @@ export const [authStore, useAuth] = makeStore<boolean>(
 /* ------------------------------------------------------------------------------------------------------- */
 
 /** Current user */
-export const [userStore, useUser] = makeStore<User | null>(
-   {
-      id: "yogeshdevaggarwal@gmail.com",
-   },
-   {},
-   { storeID: "user" }
-)
+export const [userStore, useUser] = makeStore<User | null>(null, {}, { storeID: "user" })
 
 /* ------------------------------------------------------------------------------------------------------- */
 
