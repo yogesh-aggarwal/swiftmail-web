@@ -1,5 +1,7 @@
-import { CRT, makeStore } from "common-react-toolkit"
+import { CRT, makeIDBDatabaseStore, makeStore } from "common-react-toolkit"
 
+import { Digest } from "@models/digest"
+import { Message } from "@models/message"
 import { User } from "./models/user"
 
 /* Configure state management */
@@ -28,5 +30,21 @@ export const [userStore, useUser] = makeStore<User | null>(
    {},
    { storeID: "user" }
 )
+
+/* ------------------------------------------------------------------------------------------------------- */
+
+export const [digestsStore, useDigests] = makeIDBDatabaseStore<Digest>({
+   key: "id",
+   name: "digests",
+   version: 1,
+})
+
+/* ------------------------------------------------------------------------------------------------------- */
+
+export const [messagesStore, useMessages] = makeIDBDatabaseStore<Message>({
+   key: "id",
+   name: "messages",
+   version: 1,
+})
 
 /* ------------------------------------------------------------------------------------------------------- */
