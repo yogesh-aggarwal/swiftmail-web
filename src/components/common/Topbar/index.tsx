@@ -39,7 +39,7 @@ export default function Topbar(props: TopbarProps) {
          <div className="flex items-center gap-[.4rem]">
             {props.actions.map((action, i) => (
                <div
-                  key={action.name + i}
+                  key={i}
                   onClick={action.onClick}
                   className={classNames(
                      "flex h-[48px] cursor-pointer items-center justify-center rounded-[1.1rem] px-5",
@@ -67,9 +67,9 @@ export default function Topbar(props: TopbarProps) {
                   <Search size={18} />
                </div>
             )}
-            {props.secondaryActions?.map((action) => (
+            {props.secondaryActions?.map((action, i) => (
                <div
-                  key={action.name}
+                  key={i}
                   title={action.name}
                   onClick={action.onClick}
                   className={classNames(

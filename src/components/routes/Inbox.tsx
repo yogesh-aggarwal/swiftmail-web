@@ -77,10 +77,10 @@ namespace Components {
 
       return (
          <div
-            onClick={() => router(`/inbox/${props.meta._id}`)}
+            onClick={() => router(`/inbox/${props.meta.id}`)}
             className={classNames(
                "cursor-pointer rounded-xl p-3",
-               id == props.meta._id ? "bg-purple-bg hover:bg-purple-bg" : "hover:bg-gray-bg"
+               id == props.meta.id ? "bg-purple-bg hover:bg-purple-bg" : "hover:bg-gray-bg"
             )}
          >
             <div className="flex items-center justify-between">
@@ -124,7 +124,7 @@ namespace Components {
                            {name}
                         </div>
                         {threads.map((x) => (
-                           <Card key={x._id} meta={x} />
+                           <Card key={x.id} meta={x} />
                         ))}
                      </div>
                   )
@@ -138,7 +138,7 @@ namespace Components {
 }
 
 export default function Inbox() {
-   const userID = userStore.value()?._id
+   const userID = userStore.value()?.id
    if (!userID) return
 
    const isLoading = false

@@ -1,4 +1,4 @@
-import { inboxStore, userStore } from "src/lib/state"
+import { digestsStore, inboxStore, userStore } from "src/lib/state"
 import { WSClient } from "./client"
 
 export const WS = WSClient.getInstance({
@@ -18,8 +18,13 @@ export const WS = WSClient.getInstance({
          console.log(data)
          inboxStore.set(data)
       })
+      socket.on("digests", (data: any) => {
+         console.log(data)
+         digestsStore.set(data)
+      })
 
       socket.emit("inbox")
       socket.emit("user")
+      socket.emit("digests")
    },
 })

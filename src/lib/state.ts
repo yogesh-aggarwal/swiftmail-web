@@ -1,6 +1,7 @@
 import { CRT, makeStore } from "common-react-toolkit"
 
 import { User } from "./types/models/user"
+import { Digest } from "./types/ui/digests"
 import { Inbox } from "./types/ui/inbox"
 
 /* Configure state management */
@@ -29,5 +30,10 @@ export const [userStore, useUser] = makeStore<User | null>(null, {}, { storeID: 
 
 /** Inbox */
 export const [inboxStore, useInbox] = makeStore<Inbox | null>(null, {}, { storeID: "inbox" })
+
+/* ------------------------------------------------------------------------------------------------------- */
+
+/** Digests */
+export const [digestsStore, useDigests] = makeStore<Digest | null>(null, {}, { storeID: "digests" })
 
 /* ------------------------------------------------------------------------------------------------------- */

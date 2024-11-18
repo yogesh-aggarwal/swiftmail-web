@@ -26,7 +26,7 @@ export function initAuthListener() {
 
       // Unsubscribe from the previous user
       if (subscription) {
-         if (user.uid != userStore.value()?._id) {
+         if (user.uid != userStore.value()?.id) {
             subscription()
             subscription = null
          } else {

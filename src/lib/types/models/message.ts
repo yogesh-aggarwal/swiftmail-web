@@ -19,7 +19,7 @@ export interface MessageReminders {
 
 // Main Message type
 export interface Message {
-   _id: string
+   id: string
    user_id: string
    date_updated: number
    date_created: number

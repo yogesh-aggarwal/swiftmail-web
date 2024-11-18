@@ -42,7 +42,7 @@ export type UserData = {
 }
 
 export type User = {
-   _id: string
+   id: string
    metadata: UserMetadata
    dp: string
    email: string
