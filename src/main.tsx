@@ -5,10 +5,9 @@ import { createRoot } from "react-dom/client"
 
 import App from "@components/App"
 import { POSTHOG_API_HOST, POSTHOG_API_KEY } from "@core/constants"
-import { PushNotificationManager } from "@utils/sw"
 import { PostHogProvider } from "posthog-js/react"
 
-PushNotificationManager.registerServiceWorker()
+// PushNotificationManager.registerServiceWorker()
 
 function Analytics(props: { children: any }) {
    return (
@@ -20,8 +19,6 @@ function Analytics(props: { children: any }) {
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>
-      <Analytics>
-         <App />
-      </Analytics>
+      <App />
    </StrictMode>
 )
