@@ -2,16 +2,34 @@ import { classNames } from "@utils/ui"
 import { Search, Settings } from "lucide-react"
 import { ReactNode } from "react"
 
-export default function Topbar(props: {
+export type TopbarPropsSearch = {
+   placeholder: string
+   onSearch: (query: string) => any
+   onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => any
+}
+
+export type TopbarPropsAction = {
+   name: string
+   badge?: string
+   active?: boolean
+   onClick: () => any
+}
+
+export type TopbarPropsSecondaryAction = {
+   name: string
+   icon: ReactNode
+   active?: boolean
+   onClick: () => any
+}
+
+export type TopbarProps = {
    settings?: boolean
-   search?: {
-      placeholder: string
-      onSearch: (query: string) => any
-      onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => any
-   }
-   actions: { name: string; badge?: string; active?: boolean; onClick: () => any }[]
-   secondaryActions?: { name: string; icon: ReactNode; active?: boolean; onClick: () => any }[]
-}) {
+   search?: TopbarPropsSearch
+   actions: TopbarPropsAction[]
+   secondaryActions?: TopbarPropsSecondaryAction[]
+}
+
+export default function Topbar(props: TopbarProps) {
    return (
       <header
          className={classNames("grid grid-cols-[min-content,1fr,2fr] gap-2 p-2", {
