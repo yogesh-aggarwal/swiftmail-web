@@ -1,21 +1,14 @@
 import { lazy, Suspense } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
-import { db } from "@core/db/firebase"
+import { auth } from "@core/db/firebase"
 import BaseLayout from "@layouts/BaseLayout"
-import { DigestDB } from "@models/digest"
-import { MessageDB } from "@models/message"
 import ProgressCircle from "@ui/ProgressCircle"
 import { initAuthListener } from "@utils/auth"
-import { collection, query, where } from "firebase/firestore"
-import { useAuth, userStore } from "src/lib/state"
-
-userStore.subscribe((user) => {
-   if (!user) return
-
-   DigestDB.ListenDocsByQuery(query(collection(db, DigestDB.collection), where("user_id", "==", user.id)))
-   MessageDB.ListenDocsByQuery(query(collection(db, MessageDB.collection), where("user_id", "==", user.id)))
-})
+import { onMount } from "common-react-toolkit"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { useAuth } from "src/lib/state"
+import MessageView from "./common/MessageView"
 
 namespace Components {
    export function Unauthenticated() {
@@ -39,7 +32,9 @@ namespace Components {
                      <Route path="/" element={<Navigate to="/inbox" />} />
                      <Route path="*" element={<Navigate to="/inbox" />} />
 
-                     <Route path="/inbox" element={<Inbox />} />
+                     <Route path="/inbox" element={<Inbox />}>
+                        <Route path=":id" element={<MessageView />} />
+                     </Route>
                      <Route path="/digest" element={<Digest />} />
                      <Route path="/attachments" element={<Attachments />} />
                      <Route path="/contacts" element={<Contacts />} />
