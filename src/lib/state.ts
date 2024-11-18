@@ -1,8 +1,7 @@
-import { CRT, makeIDBDatabaseStore, makeStore } from "common-react-toolkit"
+import { CRT, makeStore } from "common-react-toolkit"
 
-import { Digest } from "@models/digest"
-import { Message } from "@models/message"
-import { User } from "./models/user"
+import { Inbox } from "./types/inbox"
+import { User } from "./types/user"
 
 /* Configure state management */
 CRT.Config({
@@ -14,6 +13,7 @@ CRT.Config({
 
 /* ------------------------------------------------------------------------------------------------------- */
 
+/** Authentication */
 export const [authStore, useAuth] = makeStore<boolean>(
    !!localStorage.getItem("authToken"),
    {},
@@ -27,18 +27,7 @@ export const [userStore, useUser] = makeStore<User | null>(null, {}, { storeID: 
 
 /* ------------------------------------------------------------------------------------------------------- */
 
-export const [digestsStore, useDigests] = makeIDBDatabaseStore<Digest>({
-   key: "id",
-   name: "digests",
-   version: 1,
-})
-
-/* ------------------------------------------------------------------------------------------------------- */
-
-export const [messagesStore, useMessages] = makeIDBDatabaseStore<Message>({
-   key: "id",
-   name: "messages",
-   version: 1,
-})
+/** Inbox */
+export const [inboxStore, useInbox] = makeStore<Inbox | null>(null, {}, { storeID: "inbox" })
 
 /* ------------------------------------------------------------------------------------------------------- */
