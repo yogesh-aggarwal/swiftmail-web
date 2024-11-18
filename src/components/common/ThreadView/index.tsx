@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 
-export default function MessageView() {
+export default function ThreadView() {
    const id = useParams().id as string
 
-   return <div>index Component</div>
+   return <div>ThreadView Component</div>
 }

@@ -5,7 +5,7 @@ import BaseLayout from "@layouts/BaseLayout"
 import ProgressCircle from "@ui/ProgressCircle"
 import { initAuthListener } from "@utils/auth"
 import { useAuth } from "src/lib/state"
-import MessageView from "./common/MessageView"
+import ThreadView from "./common/ThreadView"
 
 namespace Components {
    export function Unauthenticated() {
@@ -30,10 +30,10 @@ namespace Components {
                      <Route path="*" element={<Navigate to="/inbox" />} />
 
                      <Route path="/inbox" element={<Inbox />}>
-                        <Route path=":id" element={<MessageView />} />
+                        <Route path=":id" element={<ThreadView />} />
                      </Route>
                      <Route path="/digest" element={<Digest />}>
-                        <Route path=":id" element={<MessageView />} />
+                        <Route path=":id" element={<ThreadView />} />
                      </Route>
                      <Route path="/attachments" element={<Attachments />} />
                      <Route path="/contacts" element={<Contacts />} />
