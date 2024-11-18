@@ -1,7 +1,7 @@
 import { CRT, makeStore } from "common-react-toolkit"
 
-import { Inbox } from "./types/inbox"
-import { User } from "./types/user"
+import { User } from "./types/models/user"
+import { Inbox } from "./types/ui/inbox"
 
 /* Configure state management */
 CRT.Config({

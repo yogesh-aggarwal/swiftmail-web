@@ -3,7 +3,7 @@ import { auth, db } from "@core/db/firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import { doc, getDoc, onSnapshot, Unsubscribe } from "firebase/firestore"
 import { userStore } from "src/lib/state"
-import { User } from "src/lib/types/user"
+import { User } from "src/lib/types/models/user"
 
 let subscription: Unsubscribe | null = null
 

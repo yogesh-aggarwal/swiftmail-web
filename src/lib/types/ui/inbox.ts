@@ -1,4 +1,4 @@
-import { Thread } from "./thread"
+import { Thread } from "../models/thread"
 
 export enum InboxSubCategory {
    NeedsAttention = "Needs Attention",

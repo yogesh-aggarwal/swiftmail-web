@@ -9,7 +9,7 @@ import { classNames } from "@utils/ui"
 import { makeStore, useBoundValue } from "common-react-toolkit"
 import { useMemo } from "react"
 import { useInbox, userStore } from "src/lib/state"
-import { Thread } from "src/lib/types/thread"
+import { Thread } from "src/lib/types/models/thread"
 
 const [uiStore, useUI] = makeStore<{
    categoryID: string
