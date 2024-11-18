@@ -82,8 +82,9 @@ export class Manip {
     * @returns A new string in title case.
     */
    static toTitleCase(str: string): string {
+      console.log(str);
       return str.replace(/\w\S*/g, (txt) => {
-         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+         return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()
       })
    }
 

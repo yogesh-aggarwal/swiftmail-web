@@ -1,8 +1,9 @@
+import { WS } from "@api/websocket/websocket"
 import { auth, db } from "@core/db/firebase"
-import { User } from "@models/user"
 import { onAuthStateChanged } from "firebase/auth"
 import { doc, getDoc, onSnapshot, Unsubscribe } from "firebase/firestore"
 import { userStore } from "src/lib/state"
+import { User } from "src/lib/types/user"
 
 let subscription: Unsubscribe | null = null
 
@@ -14,11 +15,18 @@ export function initAuthListener() {
          return
       }
 
+      // Connect to the websocket server
+      const authToken = await user.getIdToken()
+      localStorage.setItem("authToken", authToken)
+
+      WS.connect({ token: authToken })
+
+      // Remove the trailing \r character from the uid
       const uid = user.uid.replace("\r", "")
 
       // Unsubscribe from the previous user
       if (subscription) {
-         if (user.uid != userStore.value()?.id) {
+         if (user.uid != userStore.value()?._id) {
             subscription()
             subscription = null
          } else {
@@ -36,7 +44,5 @@ export function initAuthListener() {
             userStore.set(user)
          })
       }
-
-      localStorage.setItem("authToken", await user.getIdToken())
    })
 }
