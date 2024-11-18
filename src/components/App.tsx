@@ -56,9 +56,9 @@ initAuthListener()
 export default function App() {
    const isAuthenticated = useAuth()
 
-   onMount(() => {
-      signInWithEmailAndPassword(auth, "yogeshdevaggarwal@gmail.com", "12345678")
-   })
+   // onMount(() => {
+   //    signInWithEmailAndPassword(auth, "yogeshdevaggarwal@gmail.com", "12345678")
+   // })
 
    return isAuthenticated ? <Components.Authenticated /> : <Components.Unauthenticated />
 }
