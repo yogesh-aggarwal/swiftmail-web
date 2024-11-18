@@ -1,9 +1,12 @@
 import { lazy, Suspense } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
+import { auth } from "@core/db/firebase"
 import BaseLayout from "@layouts/BaseLayout"
 import ProgressCircle from "@ui/ProgressCircle"
 import { initAuthListener } from "@utils/auth"
+import { onMount } from "common-react-toolkit"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { useAuth } from "src/lib/state"
 import ThreadView from "./common/ThreadView"
 
@@ -53,9 +56,9 @@ initAuthListener()
 export default function App() {
    const isAuthenticated = useAuth()
 
-   // onMount(() => {
-   //    signInWithEmailAndPassword(auth, "yogeshdevaggarwal@gmail.com", "12345678")
-   // })
+   onMount(() => {
+      signInWithEmailAndPassword(auth, "yogeshdevaggarwal@gmail.com", "12345678")
+   })
 
    return isAuthenticated ? <Components.Authenticated /> : <Components.Unauthenticated />
 }

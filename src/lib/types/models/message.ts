@@ -25,6 +25,7 @@ export interface Message {
    date_created: number
    reminders: MessageReminders
    email_data: MessageEmailData
+   thread_id: string
    summary: string
    embedding: number[]
    keywords: string[]
