@@ -503,7 +503,6 @@ namespace Components {
 
 export default function Settings() {
    const isOpen = useSettings()
-   const user = useUser()
 
    if (!isOpen) return null
 
