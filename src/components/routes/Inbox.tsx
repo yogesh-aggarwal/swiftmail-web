@@ -1,14 +1,17 @@
 import { CheckCheck, Filter, LucideStar, RefreshCcw, Stars, VenetianMask } from "lucide-react"
 import { Outlet, useParams } from "react-router-dom"
 
+import { API } from "@api/api"
+import Dropdown from "@components/common/Dropdown/Dropdown"
+import { Edge, Side } from "@components/common/Dropdown/Dropdown.types"
 import Topbar, { TopbarPropsAction } from "@components/common/Topbar"
 import { useRouter } from "@hooks/useRouter"
 import RouteLayout from "@layouts/RouteLayout"
 import { Manip } from "@utils/manip"
 import { classNames } from "@utils/ui"
 import { makeStore, useBoundValue } from "common-react-toolkit"
-import { useMemo } from "react"
-import { useInbox, userStore } from "src/lib/state"
+import { useMemo, useState } from "react"
+import { useInbox, userStore, useUser } from "src/lib/state"
 import { Thread } from "src/lib/types/models/thread"
 
 const [uiStore, useUI] = makeStore<{
@@ -18,7 +21,13 @@ const [uiStore, useUI] = makeStore<{
       date_end: number
       priorities: string[]
       categories: string[]
+      star: boolean
+      labels: string[]
+      fromDate: number
+      toDate: number
    }
+   searchResults: Thread[]
+   searchQuery: string
 }>(
    {
       categoryID: "",
@@ -27,7 +36,13 @@ const [uiStore, useUI] = makeStore<{
          date_end: 0,
          priorities: [],
          categories: [],
+         star: false,
+         labels: [],
+         fromDate: Date.now(),
+         toDate: Date.now(),
       },
+      searchResults: [],
+      searchQuery: "",
    },
    {},
    { storeID: "inbox_route_ui", disableComparison: true }
@@ -60,8 +75,21 @@ namespace Components {
             actions={categoryActions}
             search={{
                placeholder: "Search in emails",
-               onSearch: (query) => console.log(query),
-               onKeyUp: (e) => e.key === "Enter" && console.log("Search"),
+               onSearch: (query) => {
+                  if (query) return
+                  uiStore.merge({ searchQuery: query })
+               },
+               onKeyUp: (e) =>
+                  e.key === "Enter" &&
+                  (async (query) => {
+                     uiStore.merge({ searchQuery: query })
+                     const [response] = await API.request({
+                        method: "GET",
+                        url: API.buildURL("/api/thread/search", { query }),
+                     })
+
+                     uiStore.merge({ searchResults: response?.data ?? [] })
+                  })((e.target as any).value),
             }}
             secondaryActions={[
                { name: "Ask AI", icon: <Stars size={18} />, onClick: () => alert("Refresh") },
@@ -108,7 +136,19 @@ namespace Components {
       )
    }
 
-   export function Messages() {
+   export function SearchResults() {
+      const searchResults = useUI((x) => x.searchResults ?? [])
+
+      return (
+         <div>
+            {searchResults.map((x) => (
+               <Card key={x.id} meta={x} />
+            ))}
+         </div>
+      )
+   }
+
+   export function Subcategories() {
       const selectedCategory = useUI((x) => x.categoryID)
       const sections = useInbox((x) => x?.categories?.[selectedCategory]?.subcategories, [selectedCategory])
 
@@ -135,6 +175,111 @@ namespace Components {
          </div>
       )
    }
+
+   export function Messages() {
+      const searchQuery = useUI((x) => x.searchQuery)
+
+      console.log(searchQuery)
+
+      return searchQuery ? <Components.SearchResults /> : <Components.Subcategories />
+   }
+}
+
+function FilterDropdown() {
+   const filter = useUI((x) => x.filter)
+   const availableLabels = useUser((x) => x?.data?.preferences?.inbox?.labels ?? [])
+
+   // Format date to YYYY-MM-DD for input value
+   const formatDateForInput = (timestamp: number) => {
+      return new Date(timestamp).toISOString().split("T")[0]
+   }
+
+   // Initialize fromDate and toDate with values from store
+   const [fromDate, setFromDate] = useState(formatDateForInput(filter.fromDate))
+   const [toDate, setToDate] = useState(formatDateForInput(filter.toDate))
+
+   const handleDateChange = (type: "from" | "to", value: string) => {
+      const timestamp = value ? new Date(value).getTime() : Date.now()
+
+      if (type === "from") {
+         setFromDate(value)
+         uiStore.merge({
+            filter: {
+               ...filter,
+               fromDate: timestamp,
+            },
+         })
+      } else {
+         setToDate(value)
+         uiStore.merge({
+            filter: {
+               ...filter,
+               toDate: timestamp,
+            },
+         })
+      }
+   }
+
+   return (
+      <div className="min-w-[300px] rounded-lg bg-white p-4">
+         <div className="mb-6 text-[1.1rem] text-sm font-medium">Filter Messages</div>
+
+         <div className="space-y-4">
+            {/* Date Range */}
+            <div className="space-y-2">
+               <div className="text-xs opacity-70">Date Range</div>
+               <div className="grid grid-cols-2 gap-2">
+                  <input
+                     type="date"
+                     value={fromDate}
+                     onChange={(e) => handleDateChange("from", e.target.value)}
+                     className="rounded-lg bg-gray-50 p-2 text-sm"
+                  />
+                  <input
+                     type="date"
+                     value={toDate}
+                     onChange={(e) => handleDateChange("to", e.target.value)}
+                     className="rounded-lg bg-gray-50 p-2 text-sm"
+                  />
+               </div>
+            </div>
+
+            {/* Star Filter */}
+            <div className="flex items-center gap-2">
+               <input
+                  type="checkbox"
+                  checked={filter.star}
+                  onChange={(e) => uiStore.merge({ filter: { ...filter, star: e.target.checked } })}
+                  className="rounded"
+               />
+               <span className="text-sm">Starred only</span>
+            </div>
+
+            {/* Labels */}
+            <div className="space-y-2">
+               <div className="text-xs opacity-70">Labels</div>
+               <div className="space-y-1">
+                  {availableLabels.map((label) => (
+                     <div key={label} className="flex items-center gap-2">
+                        <input
+                           type="checkbox"
+                           checked={filter.labels.includes(label)}
+                           onChange={(e) => {
+                              const newLabels = e.target.checked
+                                 ? [...filter.labels, label]
+                                 : filter.labels.filter((l) => l !== label)
+                              uiStore.merge({ filter: { ...filter, labels: newLabels } })
+                           }}
+                           className="rounded"
+                        />
+                        <span className="text-sm">{label}</span>
+                     </div>
+                  ))}
+               </div>
+            </div>
+         </div>
+      </div>
+   )
 }
 
 export default function Inbox() {
@@ -172,9 +317,23 @@ export default function Inbox() {
                            <CheckCheck size={16} />
                         </div>
                      )}
-                     <div className="flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
-                        <Filter size={16} />
-                     </div>
+                     <Dropdown
+                        id="filter-dropdown"
+                        placement={{
+                           triggerEdge: Edge.Bottom,
+                           expansionEdge: Edge.Top,
+                           expansionSide: Side.Right,
+                        }}
+                        expansion={<FilterDropdown />}
+                     >
+                        {(expanded) => (
+                           <div
+                              className={`flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full ${expanded ? "bg-purple-bg" : "bg-gray-bg"} text-[.84rem]`}
+                           >
+                              <Filter size={16} />
+                           </div>
+                        )}
+                     </Dropdown>
                   </div>
                </div>
                {/* <div className="flex items-center gap-1 px-5 pb-2">
