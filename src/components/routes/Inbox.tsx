@@ -1,4 +1,4 @@
-import { CheckCheck, Filter, LucideStar, RefreshCcw, Stars, VenetianMask } from "lucide-react"
+import { CheckCheck, Filter, LucideStar, RefreshCcw, Stars } from "lucide-react"
 import { Outlet, useParams } from "react-router-dom"
 
 import { API } from "@api/api"
@@ -93,7 +93,7 @@ namespace Components {
             }}
             secondaryActions={[
                { name: "Ask AI", icon: <Stars size={18} />, onClick: () => alert("Refresh") },
-               { name: "Anonymous mode", icon: <VenetianMask size={20} />, onClick: () => alert("More") },
+               // { name: "Anonymous mode", icon: <VenetianMask size={20} />, onClick: () => alert("More") },
             ]}
          />
       )

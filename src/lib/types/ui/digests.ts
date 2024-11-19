@@ -9,6 +9,7 @@ export enum DigestSubCategory {
 export type DigestData = {
    id: string
    name: string
+   description: string
    unreadCount: number
    threads: Thread[]
 }

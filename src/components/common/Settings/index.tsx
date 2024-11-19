@@ -4,7 +4,7 @@ import { Plus, X } from "lucide-react"
 import { useState } from "react"
 import { useUser } from "src/lib/state"
 
-const [settingsStore, useSettings] = makeStore<boolean>(false, {}, { storeID: "settings_modal" })
+const [settingsStore, useSettings] = makeStore<boolean>(false, {}, {})
 
 export { settingsStore }
 
