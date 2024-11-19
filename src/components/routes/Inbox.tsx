@@ -11,7 +11,7 @@ import { Manip } from "@utils/manip"
 import { classNames } from "@utils/ui"
 import { makeStore, useBoundValue } from "common-react-toolkit"
 import { useMemo, useState } from "react"
-import { useInbox, userStore, useUser } from "src/lib/state"
+import { inboxStore, useInbox, userStore, useUser } from "src/lib/state"
 import { Thread } from "src/lib/types/models/thread"
 
 const [uiStore, useUI] = makeStore<{
@@ -300,6 +300,39 @@ export default function Inbox() {
       uiStore.merge({ categoryID: categories[0] })
    }, [userStore, uiStore])
 
+   const handleMarkAllRead = async () => {
+      const selectedCategory = uiStore.value().categoryID
+      if (!selectedCategory) return
+
+      const inbox = inboxStore.value()
+      if (!inbox?.categories[selectedCategory]) return
+
+      try {
+         // Get all threads from the selected category's subcategories
+         const threads = Object.values(inbox.categories[selectedCategory].subcategories)
+            .flat()
+            .filter((thread) => !thread.flags.is_read)
+
+         // Mark each thread as read
+         await Promise.all(
+            threads.map((thread) =>
+               API.request({
+                  method: "PATCH",
+                  url: API.buildURL(`/api/thread/${thread.id}/read`),
+               })
+            )
+         )
+
+         // Refresh inbox data after marking all as read
+         await API.request({
+            method: "GET",
+            url: API.buildURL("/api/inbox"),
+         })
+      } catch (err) {
+         console.error("Failed to mark all as read:", err)
+      }
+   }
+
    return (
       <RouteLayout topbar={<Components.Header />} className="grid grid-cols-[min-content,1fr] gap-2">
          <div className="grid h-full w-[400px] grid-rows-[min-content,1fr] overflow-y-auto rounded-[1.6rem] bg-white">
@@ -313,7 +346,10 @@ export default function Inbox() {
                         </div>
                      )}
                      {unreadCount > 0 && (
-                        <div className="flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
+                        <div
+                           onClick={handleMarkAllRead}
+                           className="flex aspect-square w-[40px] cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem] hover:bg-gray-200"
+                        >
                            <CheckCheck size={16} />
                         </div>
                      )}
@@ -336,14 +372,6 @@ export default function Inbox() {
                      </Dropdown>
                   </div>
                </div>
-               {/* <div className="flex items-center gap-1 px-5 pb-2">
-                  <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
-                     Unread
-                  </div>
-                  <div className="flex h-[34px] cursor-pointer items-center justify-center rounded-lg bg-gray-bg px-3 text-[.85rem]">
-                     Urgent
-                  </div>
-               </div> */}
             </div>
             <Components.Messages />
          </div>

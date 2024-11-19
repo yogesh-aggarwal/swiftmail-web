@@ -7,10 +7,11 @@ import { initAuthListener } from "@utils/auth"
 import { useAuth } from "src/lib/state"
 import Settings from "./common/Settings"
 import ThreadView from "./common/ThreadView"
+import Auth from "./routes/Auth"
 
 namespace Components {
    export function Unauthenticated() {
-      return "Unauthenticated"
+      return <Auth />
    }
 
    export function Authenticated() {
