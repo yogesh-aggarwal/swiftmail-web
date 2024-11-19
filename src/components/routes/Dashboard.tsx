@@ -141,16 +141,6 @@ namespace Components {
          <div className="rounded-xl bg-white p-6 shadow-sm">
             <div className="mb-4 flex items-center justify-between">
                <h3 className="text-lg font-medium">Email Volume</h3>
-               <select
-                  value={timeRange}
-                  onChange={(e) => setTimeRange(e.target.value as typeof timeRange)}
-                  className="rounded-lg border border-gray-200 px-3 py-1 text-sm"
-               >
-                  <option value="day">Today</option>
-                  <option value="week">This Week</option>
-                  <option value="month">This Month</option>
-                  <option value="year">This Year</option>
-               </select>
             </div>
             <Line data={chartData} options={options} />
          </div>
@@ -237,7 +227,7 @@ export default function DashboardRoute() {
 
    if (!dashboard) {
       return (
-         <RouteLayout topbar={<Components.Header />}>
+         <RouteLayout topbar={null}>
             <div className="flex h-full items-center justify-center">
                <div className="text-sm opacity-50">Loading dashboard data...</div>
             </div>
@@ -246,7 +236,7 @@ export default function DashboardRoute() {
    }
 
    return (
-      <RouteLayout topbar={<Components.Header />}>
+      <RouteLayout topbar={null}>
          <div className="h-full space-y-4 overflow-y-auto p-6">
             <div className="grid grid-cols-12 gap-4">
                {/* Left Column */}

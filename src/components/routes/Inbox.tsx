@@ -126,7 +126,6 @@ namespace Components {
                </div>
             </div>
             <div className="pt-[2px] text-[.85rem] opacity-75">{props.meta.title}</div>
-            <div className="pt-[2px] text-[.85rem] opacity-55">{props.meta.title}</div>
             <div className="mt-2 flex items-center gap-2">
                <div className="rounded-lg bg-green-bg px-2 py-1 text-[.7rem]">
                   <span className="opacity-70">{Manip.toTitleCase(props.meta.priority)} priority</span>

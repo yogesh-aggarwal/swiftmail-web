@@ -30,6 +30,6 @@ export const WS = WSClient.getInstance({
       socket.emit("inbox")
       socket.emit("user")
       socket.emit("digests")
-      socket.emit("dashboard")
+      // socket.emit("dashboard")
    },
 })

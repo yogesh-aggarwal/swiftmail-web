@@ -1,4 +1,5 @@
 import { API } from "@api/api"
+import { Manip } from "@utils/manip"
 import { classNames } from "@utils/ui"
 import { makeStore, onUpdate } from "common-react-toolkit"
 import {
@@ -234,7 +235,21 @@ export default function ThreadView() {
       <div className="grid h-full grid-rows-[min-content,1fr,min-content] overflow-auto">
          <div>
             <div className="flex h-[72px] items-center justify-between px-5">
-               <div className="text-[1.5rem] font-medium">{thread?.title}</div>
+               <div className="flex items-center gap-5">
+                  <div className="text-[1.5rem] font-medium">{thread?.title}</div>
+                  <div className="mt-2 flex items-center gap-2">
+                     <div className="rounded-lg bg-green-bg px-2 py-1 text-[.7rem]">
+                        <span className="opacity-70">
+                           {Manip.toTitleCase(thread?.priority ?? "")} priority
+                        </span>
+                     </div>
+                     <div className="rounded-lg bg-purple-bg px-2 py-1 text-[.7rem]">
+                        <span className="opacity-70">
+                           {thread?.labels.map((x) => Manip.toTitleCase(x)).join(", ")}
+                        </span>
+                     </div>
+                  </div>
+               </div>
                <div className="flex items-center gap-2">
                   {isLoading && (
                      <div className="flex aspect-square w-[40px] animate-spin cursor-pointer items-center justify-center rounded-full bg-gray-bg text-[.84rem]">
