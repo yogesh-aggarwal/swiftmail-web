@@ -1,6 +1,6 @@
 import { makeStore } from "common-react-toolkit"
 import { AnimatePresence, motion } from "framer-motion"
-import { Plus, X } from "lucide-react"
+import { Mail, Plus, X } from "lucide-react"
 import { useState } from "react"
 import { useUser } from "src/lib/state"
 
@@ -499,6 +499,34 @@ namespace Components {
          </div>
       )
    }
+
+   export function AccountSettings() {
+      const handleGoogleAuth = async () => {
+         const res = await (
+            await fetch("http://localhost:3100/auth/google/auth_url", {
+               headers: {
+                  Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+               },
+            })
+         ).json()
+         window.open(res.url, "_blank")
+      }
+
+      const isUserAuth = useUser((x) => x?.credentials?.google_oauth)
+      if (isUserAuth) return null
+
+      return (
+         <div className="space-y-4">
+            <button
+               onClick={handleGoogleAuth}
+               className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm hover:bg-gray-50"
+            >
+               <Mail size={16} />
+               Connect Google Account
+            </button>
+         </div>
+      )
+   }
 }
 
 export default function Settings() {
@@ -535,6 +563,10 @@ export default function Settings() {
 
                <div className="h-[calc(100%-140px)] overflow-auto p-6">
                   <div className="space-y-8">
+                     <Components.Section title="Account">
+                        <Components.AccountSettings />
+                     </Components.Section>
+
                      <Components.Section title="Focus Hours">
                         <Components.FocusHours />
                      </Components.Section>
