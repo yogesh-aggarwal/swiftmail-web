@@ -1,3 +1,4 @@
+import { API_WS_BASE_URI } from "@core/constants"
 import { io, Socket } from "socket.io-client"
 import { IWSClient, WSClientOptions, WSClientPayload } from "./client.types"
 
@@ -25,7 +26,7 @@ export class WSClient implements IWSClient {
       if (this.socket) this.socket.disconnect()
 
       // Connect to the server with the token
-      this.socket = io("http://localhost:3000", {
+      this.socket = io(API_WS_BASE_URI, {
          path: "/ws",
          query: payload,
          reconnection: this.options.reconnection,
