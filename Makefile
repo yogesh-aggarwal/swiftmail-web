@@ -1,4 +1,5 @@
-RUNNER=bun
+RUNNER := bun
+PRODUCTION_BRANCH := production
 
 install:
 	clear
@@ -32,3 +33,10 @@ pretty:
 setup_env:
 	clear
 	@echo "HELLO"
+
+deploy:
+	@git push origin main
+	@git update-ref -d refs/heads/$(PRODUCTION_BRANCH)
+	@git checkout -b $(PRODUCTION_BRANCH)
+	@git push origin $(PRODUCTION_BRANCH) -f
+	@git checkout main
