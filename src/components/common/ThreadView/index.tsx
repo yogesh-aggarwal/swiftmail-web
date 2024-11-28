@@ -42,13 +42,23 @@ namespace Components {
          ref.current?.focus()
       }, [isReplying, ref])
 
-      const handleSubmit = useCallback(() => {
+      const handleSubmit = useCallback(async () => {
          setIsWorking(true)
+         const replyingMessageId = uiStore.value().replyingMessageId
          const innerHTML = ref.current?.innerHTML
 
-         setTimeout(() => {
-            setIsWorking(false)
-         }, 1000)
+         const res = await fetch("https://swiftmail-pubsub-api.web.app/queue/reply", {
+            method: "POST",
+            body: JSON.stringify({
+               thread_id: replyingMessageId,
+               message: innerHTML,
+            }),
+         })
+         if (res.status !== 200) {
+            console.error(res)
+         } else {
+            console.log(await res.json())
+         }
 
          console.log(innerHTML)
       }, [])

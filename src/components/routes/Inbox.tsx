@@ -114,7 +114,7 @@ namespace Components {
             <div className="flex items-center justify-between">
                <div className="flex items-center gap-2">
                   <LucideStar size={16} />
-                  <div className="text-[1rem] font-medium">Sender</div>
+                  <div className="text-[1rem] font-medium">{props.meta.title}</div>
                </div>
                <div className="text-[.75rem] opacity-55">
                   {Intl.DateTimeFormat("en-US", {
@@ -125,7 +125,7 @@ namespace Components {
                   }).format(props.meta.date_updated)}
                </div>
             </div>
-            <div className="pt-[2px] text-[.85rem] opacity-75">{props.meta.title}</div>
+            <div className="pt-[2px] text-[.85rem] opacity-75">{props.meta.description}</div>
             <div className="mt-2 flex items-center gap-2">
                <div className="rounded-lg bg-green-bg px-2 py-1 text-[.7rem]">
                   <span className="opacity-70">{Manip.toTitleCase(props.meta.priority)} priority</span>
@@ -177,9 +177,6 @@ namespace Components {
 
    export function Messages() {
       const searchQuery = useUI((x) => x.searchQuery)
-
-      console.log(searchQuery)
-
       return searchQuery ? <Components.SearchResults /> : <Components.Subcategories />
    }
 }
