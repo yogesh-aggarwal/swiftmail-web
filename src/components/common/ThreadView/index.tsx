@@ -47,11 +47,15 @@ namespace Components {
          const replyingMessageId = uiStore.value().replyingMessageId
          const innerHTML = ref.current?.innerHTML
 
-         const res = await fetch("https://swiftmail-pubsub-api.web.app/queue/reply", {
+         const res = await fetch("https://swiftmail-pubsub-api.onrender.com/queue/reply", {
             method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+               Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
             body: JSON.stringify({
-               thread_id: replyingMessageId,
-               message: innerHTML,
+               message_id: replyingMessageId,
+               reply_body: innerHTML,
             }),
          })
          if (res.status !== 200) {
