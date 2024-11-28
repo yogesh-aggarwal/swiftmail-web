@@ -513,12 +513,12 @@ namespace Components {
       }
 
       const isUserAuth = useUser((x) => x?.credentials?.google_oauth)
-      if (isUserAuth)
-         return (
-            <div className="space-y-4">
-               <div>Connected to Google Account</div>
-            </div>
-         )
+      // if (isUserAuth)
+      //    return (
+      //       <div className="space-y-4">
+      //          <div>Connected to Google Account</div>
+      //       </div>
+      //    )
 
       return (
          <div className="space-y-4">
