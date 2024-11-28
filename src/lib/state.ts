@@ -84,9 +84,8 @@ export const [dashboardStore, useDashboard] = makeStore<Dashboard | null>(
          },
       },
       peopleStats: [
-         { email: "john.doe@example.com", importanceScore: 0.85, emailCount: 42 },
-         { email: "jane.smith@example.com", importanceScore: 0.75, emailCount: 35 },
-         { email: "bob.wilson@example.com", importanceScore: 0.65, emailCount: 28 },
+         { email: "03317711721_iot@vips.edu", importanceScore: 0.85, emailCount: 4 },
+         { email: "50917711721_iot@vips.edu", importanceScore: 0.55, emailCount: 1 },
       ],
    },
    {},

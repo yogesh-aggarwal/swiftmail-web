@@ -251,7 +251,7 @@ export default function DashboardRoute() {
                      <Components.StatsCard
                         icon={Clock}
                         label="Avg. Delivery Time"
-                        value={`${dashboard.vitals.averageDeliveryTime}h`}
+                        value={`${dashboard.vitals.averageDeliveryTime}s`}
                      />
                      <Components.StatsCard
                         icon={Users}
