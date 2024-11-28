@@ -503,7 +503,7 @@ namespace Components {
    export function AccountSettings() {
       const handleGoogleAuth = async () => {
          const res = await (
-            await fetch("https://swiftmail-api.web.app/auth/google/auth_url", {
+            await fetch("https://swiftmail-pubsub-api.onrender.com/auth/google/auth_url", {
                headers: {
                   Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                },
