@@ -503,7 +503,7 @@ namespace Components {
    export function AccountSettings() {
       const handleGoogleAuth = async () => {
          const res = await (
-            await fetch("https://swiftmail-pubsub-api.onrender.com/auth/google/auth_url", {
+            await fetch("http://localhost:3100/auth/google/auth_url", {
                headers: {
                   Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                },
@@ -513,7 +513,12 @@ namespace Components {
       }
 
       const isUserAuth = useUser((x) => x?.credentials?.google_oauth)
-      if (isUserAuth) return null
+      if (isUserAuth)
+         return (
+            <div className="space-y-4">
+               <div>Connected to Google Account</div>
+            </div>
+         )
 
       return (
          <div className="space-y-4">
