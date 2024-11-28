@@ -3,10 +3,12 @@ export interface MessageEmailData {
    message_id: string
    thread_id: string
    from_email: string
+   from_name: string
    to_email: string
    cc_email: string
    bcc_email: string
    subject: string
+   snippet: string
    html_content: string
 }
 
